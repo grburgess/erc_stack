@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  bitlbee:
+    image: grburgess/bitlbee-bridge:latest
+    ports:
+      - "6667:6667"
+    volumes:
+      - /Users/jburgess/coding/docker/erc_stack/config/bitlbee:/var/lib/bitlbee
+      - /Users/jburgess/coding/docker/erc_stack/config/signald/run:/var/run/signald
+
+    restart: always
+    depends_on:
+      - signald
+
+  signald:
+    image: finn/signald
+    volumes:
+      - /Users/jburgess/coding/docker/erc_stack/config/signald/run:/signald
+    restart: always
